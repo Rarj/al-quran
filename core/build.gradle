@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -21,14 +23,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/main/java', 'src/main/java/rio/arj/core'
+            }
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Dependencies.kotlinJdk
+    implementation Dependencies.appCompat
+    implementation Dependencies.kotlinExtension
+    implementation Dependencies.constraintLayout
 
-    implementation(Dependencies.kotlinJdk)
-    implementation (Dependencies.appCompat)
-    implementation (Dependencies.kotlinExtension)
+    implementation Retrofit.retrofit
+    implementation Retrofit.gsonConverter
+    implementation Retrofit.gson
+    implementation Retrofit.okHttpLogging
+    implementation Rx.rxAdapter
+
+    implementation Dagger.dagger
+    implementation Dagger.android
+    implementation Dagger.androidSupport
+    kapt Dagger.compiler
+    kapt Dagger.processor
+
+    testApi Testing.jUnit
+    androidTestApi Testing.jUnitExtension
+    androidTestApi Testing.espresso
 
 }

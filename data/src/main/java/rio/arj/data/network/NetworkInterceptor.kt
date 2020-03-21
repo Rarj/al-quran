@@ -26,7 +26,7 @@ import rio.arj.data.ResponseCode.SUCCESS
 import rio.arj.data.ResponseCode.UNAUTHORIZED
 import java.io.IOException
 
-class NetworkInterceptor(private val context: Context) : Interceptor {
+class NetworkInterceptor() : Interceptor {
 
   @Throws(IOException::class)
   override fun intercept(chain: Interceptor.Chain): Response {
@@ -46,15 +46,15 @@ class NetworkInterceptor(private val context: Context) : Interceptor {
       response.code() == RESPONSE_GATEWAY_TIMEOUT -> Log.e(GATEWAY_TIMEOUT, GATEWAY_TIMEOUT)
     }
 
-    if (ConnectivityStatus.isConnected(context)) {
-      request.newBuilder()
-            .header("Cache-Control", "public, max-age=" + 60)
-            .build()
-
-    } else {
-      request.newBuilder()
-            .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
-    }
+//    if (ConnectivityStatus.isConnected(context)) {
+//      request.newBuilder()
+//            .header("Cache-Control", "public, max-age=" + 60)
+//            .build()
+//
+//    } else {
+//      request.newBuilder()
+//            .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+//    }
 
     return chain.proceed(request)
   }
