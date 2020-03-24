@@ -1,2 +1,2 @@
-include ':app', ':core', ':data', ':features:dashboard'
+include ':app', ':core', ':data', ':features:dashboard', ':ui'
 rootProject.name = 'Al-Qur`an'
