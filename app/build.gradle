@@ -41,6 +41,7 @@ dependencies {
     implementation(Dependencies.appCompat)
     implementation(Dependencies.kotlinExtension)
     implementation(Dependencies.constraintLayout)
+    implementation(Dependencies.material)
 
     testApi(Testing.jUnit)
     androidTestApi(Testing.jUnitExtension)

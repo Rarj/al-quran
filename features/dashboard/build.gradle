@@ -39,6 +39,7 @@ dependencies {
     implementation(Dependencies.kotlinExtension)
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.recyclerView)
+    implementation(Dependencies.material)
 
     kapt(Dependencies.dataBindingCompiler)
 
@@ -62,4 +63,5 @@ dependencies {
 
     implementation(project(Modules.data))
     implementation(project(Modules.core))
+    implementation(project(Modules.ui))
 }
