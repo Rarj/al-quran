@@ -4,17 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion(Android.compileAndTargetSdk)
+    buildToolsVersion(Android.buildTools)
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        minSdkVersion(Android.minimumSdk)
+        targetSdkVersion(Android.compileAndTargetSdk)
+        versionCode(Android.versionCode)
+        versionName(Android.versionName)
+        testInstrumentationRunner(Android.androidJUnitRunner)
     }
 
     buildTypes {
@@ -25,32 +23,30 @@ android {
         release {
             buildConfigField("String", "BASE_URL", BASE_URL)
 
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled(false)
+            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro')
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.kotlinJdk
-    implementation Dependencies.appCompat
-    implementation Dependencies.kotlinExtension
-    implementation Dependencies.constraintLayout
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation(Dependencies.kotlinJdk)
+    implementation(Dependencies.kotlinExtension)
 
-    implementation Retrofit.retrofit
-    implementation Retrofit.gsonConverter
-    implementation Retrofit.gson
-    implementation Retrofit.okHttpLogging
-    implementation Rx.rxAdapter
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.gsonConverter)
+    implementation(Retrofit.gson)
+    implementation(Retrofit.okHttpLogging)
+    implementation(Rx.rxAdapter)
 
-    implementation Dagger.dagger
-    implementation Dagger.android
-    implementation Dagger.androidSupport
-    kapt Dagger.compiler
-    kapt Dagger.processor
+    implementation(Dagger.dagger)
+    implementation(Dagger.android)
+    implementation(Dagger.androidSupport)
+    kapt(Dagger.compiler)
+    kapt(Dagger.processor)
 
-    testApi Testing.jUnit
-    androidTestApi Testing.jUnitExtension
-    androidTestApi Testing.espresso
+    testApi(Testing.jUnit)
+    androidTestApi(Testing.jUnitExtension)
+    androidTestApi(Testing.espresso)
 }

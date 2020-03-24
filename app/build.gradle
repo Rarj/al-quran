@@ -1,62 +1,50 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion Android.compileAndTargetSdk
-    buildToolsVersion Android.buildTools
+    compileSdkVersion(Android.compileAndTargetSdk)
+    buildToolsVersion(Android.buildTools)
+
     defaultConfig {
-        applicationId Android.applicationId
-        minSdkVersion Android.minimumSdk
-        targetSdkVersion Android.compileAndTargetSdk
-        versionCode Android.versionCode
-        versionName Android.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId(Android.applicationId)
+        minSdkVersion(Android.minimumSdk)
+        targetSdkVersion(Android.compileAndTargetSdk)
+        versionCode(Android.versionCode)
+        versionName(Android.versionName)
+        testInstrumentationRunner(Android.androidJUnitRunner)
     }
+
     buildTypes {
         debug {
-            buildConfigField 'String', "BASE_URL", BASE_URL
-            resValue 'string', "base_url", BASE_URL
+            buildConfigField('String', "BASE_URL", BASE_URL)
         }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled(false)
+            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro')
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
     dataBinding {
-        enabled = true
+        enabled(true)
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.kotlinJdk
-    implementation Dependencies.appCompat
-    implementation Dependencies.kotlinExtension
-    implementation Dependencies.constraintLayout
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation(Dependencies.kotlinJdk)
+    implementation(Dependencies.appCompat)
+    implementation(Dependencies.kotlinExtension)
+    implementation(Dependencies.constraintLayout)
 
-    implementation Retrofit.retrofit
-    implementation Retrofit.gsonConverter
-    implementation Retrofit.gson
-    implementation Retrofit.okHttpLogging
-    implementation Rx.rxAdapter
-
-    implementation Dagger.dagger
-    implementation Dagger.android
-    implementation Dagger.androidSupport
-    kapt Dagger.compiler
-    kapt Dagger.processor
-
-    testApi Testing.jUnit
-    androidTestApi Testing.jUnitExtension
-    androidTestApi Testing.espresso
+    testApi(Testing.jUnit)
+    androidTestApi(Testing.jUnitExtension)
+    androidTestApi(Testing.espresso)
 
     implementation(project(Modules.core))
     implementation(project(Modules.dashboard))

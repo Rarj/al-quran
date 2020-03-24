@@ -1,4 +1,4 @@
-package viewmodel
+package rio.arj.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

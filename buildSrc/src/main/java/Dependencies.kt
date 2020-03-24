@@ -9,6 +9,8 @@ object Version {
   const val material = "1.1.0-alpha05"
   const val recyclerView = "1.0.0"
 
+  const val dataBindingCompiler = "3.1.4"
+
   const val archLifecycle = "2.0.0"
 
   const val dagger = "2.21"
@@ -52,6 +54,8 @@ object Dependencies {
   val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
   val material = "com.google.android.material:material:${Version.material}"
   val recyclerView = "androidx.recyclerview:recyclerview:${Version.recyclerView}"
+
+  val dataBindingCompiler = "com.android.databinding:compiler:${Version.dataBindingCompiler}"
 }
 
 object Jetpack {

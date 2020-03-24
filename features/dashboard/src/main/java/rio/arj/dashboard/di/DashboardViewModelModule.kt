@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import viewmodel.ViewModelFactory
+import rio.arj.core.viewmodel.ViewModelFactory
 import rio.arj.dashboard.ui.DashboardViewModel
-import viewmodel.ViewModelKey
+import rio.arj.core.viewmodel.ViewModelKey
 
 @Module
 abstract class DashboardViewModelModule {
