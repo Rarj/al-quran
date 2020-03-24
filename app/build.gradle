@@ -48,4 +48,5 @@ dependencies {
 
     implementation(project(Modules.core))
     implementation(project(Modules.dashboard))
+    implementation(project(Modules.ui))
 }
