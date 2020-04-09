@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import rio.arj.dashboard.R
 import rio.arj.dashboard.databinding.ActivityDashboardBinding
 import rio.arj.dashboard.di.DaggerDashboardComponent
 import rio.arj.dashboard.di.DashboardModule
+import rio.arj.ui.ItemDecoration
 import javax.inject.Inject
 
 class DashboardActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class DashboardActivity : AppCompatActivity() {
 
   private lateinit var viewModelDashboard: DashboardViewModel
   private lateinit var bindingDashboard: ActivityDashboardBinding
+
+  private lateinit var dashboardAdapter: DashboardAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -32,13 +36,27 @@ class DashboardActivity : AppCompatActivity() {
     bindingDashboard.viewModelDashboard = viewModelDashboard
     bindingDashboard.lifecycleOwner = this
 
-    viewModelDashboard.isSuccess.observe(this, Observer {
-      if (it) {
-        Toast.makeText(this, "data loaded", Toast.LENGTH_LONG).show()
+    observer()
+  }
+
+  private fun initAdapter() {
+    dashboardAdapter = DashboardAdapter(viewModelDashboard.listSurah.value)
+
+    bindingDashboard.recyclerAlquran.apply {
+      layoutManager = LinearLayoutManager(this@DashboardActivity)
+      addItemDecoration(ItemDecoration(16))
+      this.adapter = dashboardAdapter
+      dashboardAdapter.notifyDataSetChanged()
+    }
+  }
+
+  private fun observer() {
+    viewModelDashboard.isSuccess.observe(this, Observer { isSucces ->
+      if (isSucces) {
+        initAdapter()
       } else {
-        Toast.makeText(this, "load failed", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Load Failed. Try Again", Toast.LENGTH_LONG).show()
       }
     })
-
   }
 }

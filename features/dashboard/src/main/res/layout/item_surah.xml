@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+      name="dataSurah"
+      type="rio.arj.data.repository.list.Data" />
+  </data>
+
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_surah_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        android:src="@drawable/ic_surah_badge"
+        app:layout_constraintBottom_toTopOf="@id/guideline_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_number_surah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@{dataSurah.nomor}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/persian_green_02B19C"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/image_surah_number"
+        app:layout_constraintEnd_toEndOf="@id/image_surah_number"
+        app:layout_constraintStart_toStartOf="@id/image_surah_number"
+        app:layout_constraintTop_toTopOf="@id/image_surah_number"
+        tools:text="1" />
+
+      <View
+        android:id="@+id/divider_1"
+        android:layout_width="60dp"
+        android:layout_height="1dp"
+        android:background="#FC9942"
+        app:layout_constraintBottom_toBottomOf="@id/image_surah_number"
+        app:layout_constraintStart_toEndOf="@id/image_surah_number"
+        app:layout_constraintTop_toTopOf="@id/image_surah_number" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_type_surah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@{dataSurah.type}"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#FC9942"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/divider_1"
+        app:layout_constraintStart_toEndOf="@id/image_surah_number"
+        tools:text="MEKAH" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_total_ayah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@{`` + dataSurah.ayat + ` Ayat`}"
+        android:textColor="#FC9942"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/image_surah_number"
+        app:layout_constraintTop_toBottomOf="@id/divider_1"
+        tools:text="7 Ayat" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_surah_arabic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:text="@{dataSurah.asma}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black_000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/text_surah_indonesia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="الفاتحة" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_surah_indonesia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:gravity="end"
+        android:text="@{dataSurah.nama}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black_000000"
+        app:layout_constraintBottom_toTopOf="@id/text_surah_mean"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_surah_arabic"
+        tools:text="Al Fatihah" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_surah_mean"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:gravity="end"
+        android:text="@{dataSurah.arti}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/gray_ADABAB"
+        app:layout_constraintBottom_toTopOf="@id/guideline_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_surah_indonesia"
+        tools:text="Pembukaan" />
+
+      <View
+        android:id="@+id/guideline_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_surah_mean" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_overview"
+        textHtml="@{dataSurah.keterangan}"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_1"
+        tools:text="@tools:sample/lorem/random" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_more"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:text="@string/dashboard_more_caption"
+        android:textColor="@color/blue_3070C9"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_overview"
+        app:layout_constraintVertical_bias="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.cardview.widget.CardView>
+</layout>

@@ -36,7 +36,7 @@
           android:layout_height="wrap_content"
           android:foregroundGravity="center_vertical"
           android:gravity="center"
-          android:text="Beranda"
+          android:text="@string/dashboard_toolbar_caption"
           android:textColor="@color/white_FFFFFF" />
 
       </androidx.appcompat.widget.Toolbar>
@@ -47,11 +47,12 @@
       android:id="@+id/recycler_alquran"
       android:layout_width="0dp"
       android:layout_height="0dp"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      android:overScrollMode="never"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
+      app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+      tools:listitem="@layout/item_surah" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

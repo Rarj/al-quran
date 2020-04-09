@@ -1,15 +1,18 @@
 package rio.arj.dashboard.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import rio.arj.dashboard.DashboardUseCase
+import rio.arj.data.repository.list.Data
 import javax.inject.Inject
 
-interface DashboardContract {
-  fun loadListQuran()
+private interface DashboardContract {
+  fun loadListSurah()
 }
 
 class DashboardViewModel @Inject constructor(
@@ -18,21 +21,22 @@ class DashboardViewModel @Inject constructor(
 
   var compositeDisposable: CompositeDisposable = CompositeDisposable()
   var isSuccess = MutableLiveData<Boolean>()
+  var listSurah = MutableLiveData<List<Data>>()
 
   init {
-    loadListQuran()
+    loadListSurah()
   }
 
-  override fun loadListQuran() {
+  override fun loadListSurah() {
     compositeDisposable.add(
           useCase.getListQuran()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({ surah ->
+                  listSurah.value = surah
                   isSuccess.value = true
-
                 }, {
-                  isSuccess.value = true
+                  isSuccess.value = false
                 })
     )
   }

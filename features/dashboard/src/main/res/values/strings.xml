@@ -1,1 +1,4 @@
-<resources></resources>
+<resources>
+  <string name="dashboard_toolbar_caption">Beranda</string>
+  <string name="dashboard_more_caption">Selengkapnya</string>
+</resources>
