@@ -5,7 +5,7 @@ import rio.arj.data.repository.list.Data
 import rio.arj.data.repository.list.ListRepository
 import javax.inject.Inject
 
-class DashboardUseCase @Inject constructor(private val repository: ListRepository) {
+class DashboardUseCase @Inject constructor(val repository: ListRepository) {
   fun getListQuran(): Observable<List<Data>> {
     return repository.getListQuran()
   }

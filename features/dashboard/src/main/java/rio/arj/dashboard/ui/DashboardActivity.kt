@@ -1,5 +1,6 @@
 package rio.arj.dashboard.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +8,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import rio.arj.ItemClickListener
+import rio.arj.core.Constants.INTENT_KEY
 import rio.arj.dashboard.R
 import rio.arj.dashboard.databinding.ActivityDashboardBinding
 import rio.arj.dashboard.di.DaggerDashboardComponent
 import rio.arj.dashboard.di.DashboardModule
+import rio.arj.data.repository.list.Data
+import rio.arj.detail.ui.DetailAyahActivity
 import rio.arj.ui.ItemDecoration
 import javax.inject.Inject
 
@@ -40,7 +45,14 @@ class DashboardActivity : AppCompatActivity() {
   }
 
   private fun initAdapter() {
-    dashboardAdapter = DashboardAdapter(viewModelDashboard.listSurah.value)
+    dashboardAdapter = DashboardAdapter(this, viewModelDashboard.listSurah.value,
+          object : ItemClickListener<Data> {
+            override fun onItemClicked(value: Data) {
+              val intent = Intent(this@DashboardActivity, DetailAyahActivity::class.java)
+              intent.putExtra(INTENT_KEY, value)
+              startActivity(intent)
+            }
+          })
 
     bindingDashboard.recyclerAlquran.apply {
       layoutManager = LinearLayoutManager(this@DashboardActivity)
@@ -51,8 +63,8 @@ class DashboardActivity : AppCompatActivity() {
   }
 
   private fun observer() {
-    viewModelDashboard.isSuccess.observe(this, Observer { isSucces ->
-      if (isSucces) {
+    viewModelDashboard.isSuccess.observe(this, Observer { isSuccess ->
+      if (isSuccess) {
         initAdapter()
       } else {
         Toast.makeText(this, "Load Failed. Try Again", Toast.LENGTH_LONG).show()

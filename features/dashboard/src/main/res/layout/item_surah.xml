@@ -47,7 +47,7 @@
         android:id="@+id/divider_1"
         android:layout_width="60dp"
         android:layout_height="1dp"
-        android:background="#FC9942"
+        android:background="#E8BA64"
         app:layout_constraintBottom_toBottomOf="@id/image_surah_number"
         app:layout_constraintStart_toEndOf="@id/image_surah_number"
         app:layout_constraintTop_toTopOf="@id/image_surah_number" />

@@ -1,5 +1,9 @@
 package rio.arj.data.repository.list
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Data(
       val arti: String? = "",
       val asma: String? = "",
@@ -9,4 +13,4 @@ data class Data(
       val nama: String? = "",
       val nomor: String? = "",
       val type: String? = ""
-)
+) : Parcelable

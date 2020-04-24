@@ -41,6 +41,8 @@ dependencies {
     implementation(Dependencies.recyclerView)
     implementation(Dependencies.material)
 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     kapt(Dependencies.dataBindingCompiler)
 
     implementation(Rx.rxBinding)

@@ -1,1 +1,5 @@
-<manifest package="rio.arj.data" />
+<manifest package="rio.arj.data"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>
