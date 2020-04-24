@@ -1,6 +1,5 @@
 package rio.arj.data.network
 
-import android.content.Context
 import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response

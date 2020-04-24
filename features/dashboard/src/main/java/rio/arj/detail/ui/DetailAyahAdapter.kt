@@ -2,7 +2,6 @@ package rio.arj.detail.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import rio.arj.dashboard.BR
 import rio.arj.dashboard.databinding.ItemAyahBinding

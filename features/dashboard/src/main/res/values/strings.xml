@@ -2,4 +2,8 @@
   <string name="dashboard_toolbar_caption">Beranda</string>
   <string name="dashboard_more_caption">Selengkapnya</string>
   <string name="dashboard_less_caption">Lebih Sedikit</string>
+
+  <string name="detail_bismillah_ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</string>
+  <string name="detail_bismillah_id">bismillahirahmanirrahiim</string>
+  <string name="detail_bismillah_mean">Dengan menyebut nama Allah Yang Maha Pemurah lagi Maha Penyayang.</string>
 </resources>
