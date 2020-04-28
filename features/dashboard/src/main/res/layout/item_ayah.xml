@@ -20,11 +20,50 @@
       android:text="@{itemModel.ar}"
       android:textAppearance="@style/TextAppearance.AppCompat.Large"
       android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:text="الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ" />
+      tools:text="@string/detail_bismillah_ar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_ayah_arabic_translate"
+      textHtml="@{itemModel.tr}"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_8"
+      android:layout_marginEnd="@dimen/margin_8"
+      android:gravity="end"
+      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+      android:textColor="@color/black_000000"
+      android:textStyle="bold|italic"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/text_ayah_arabic" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_ayah_mean"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_8"
+      android:layout_marginEnd="@dimen/margin_8"
+      android:gravity="end"
+      android:text="@{itemModel.id}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+      android:textColor="@color/persian_green_02B19C"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/text_ayah_arabic_translate" />
+
+    <View
+      android:id="@+id/divider_1"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="@dimen/margin_8"
+      android:background="@color/gray_ADABAB"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/text_ayah_mean" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
