@@ -11,7 +11,7 @@ object Version {
 
   const val dataBindingCompiler = "3.1.4"
 
-  const val archLifecycle = "2.0.0"
+  const val archLifecycle = "2.1.0"
 
   const val dagger = "2.21"
 

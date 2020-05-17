@@ -46,7 +46,17 @@ class DetailAyahActivity : AppCompatActivity() {
 
     viewModel.loadDetailAyah(data.nomor.toString())
 
+    listener()
+    observer()
+  }
+
+  private fun listener() {
+    binding.toolbarAyah.setNavigationOnClickListener { finish() }
+  }
+
+  private fun observer() {
     viewModel.detailAyahModel.observe(this, Observer { listAyah ->
+      binding.isSuccess = listAyah.isNotEmpty()
       if (listAyah.isNotEmpty()) {
         removeBismillah(listAyah)
         detailAyahAdapter = DetailAyahAdapter(listAyah)

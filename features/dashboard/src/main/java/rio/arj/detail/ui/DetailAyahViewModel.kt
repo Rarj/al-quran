@@ -17,7 +17,6 @@ class DetailAyahViewModel @Inject constructor(val useCase: DetailAyahUseCase) : 
 
   var compositeDisposable: CompositeDisposable = CompositeDisposable()
   var detailAyahModel = MutableLiveData<DetailAyahModel>()
-
   var hideBismismillah = MutableLiveData<Boolean>()
 
   override fun loadDetailAyah(numberOfAyah: String) {
