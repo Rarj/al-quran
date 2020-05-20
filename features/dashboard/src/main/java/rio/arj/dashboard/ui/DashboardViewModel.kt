@@ -20,6 +20,7 @@ class DashboardViewModel @Inject constructor(
   var compositeDisposable: CompositeDisposable = CompositeDisposable()
   var isSuccess = MutableLiveData<Boolean>()
   var listSurah = MutableLiveData<List<Data>>()
+  var query = MutableLiveData<String>()
 
   init {
     loadListSurah()

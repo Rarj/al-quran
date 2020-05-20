@@ -2,6 +2,8 @@ package rio.arj.dashboard.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,6 +19,7 @@ import rio.arj.dashboard.di.DashboardModule
 import rio.arj.data.repository.list.Data
 import rio.arj.detail.ui.DetailAyahActivity
 import rio.arj.ui.ItemDecoration
+import rio.arj.ui.hideKeyboard
 import javax.inject.Inject
 
 class DashboardActivity : AppCompatActivity() {
@@ -41,7 +44,31 @@ class DashboardActivity : AppCompatActivity() {
     bindingDashboard.viewModelDashboard = viewModelDashboard
     bindingDashboard.lifecycleOwner = this
 
+    listener()
     observer()
+  }
+
+  private fun listener() {
+    bindingDashboard.toolbarDashboard.setOnMenuItemClickListener {
+      when (it.itemId) {
+        R.id.item_dashboard_search -> {
+          bindingDashboard.isSearchMode = true
+        }
+      }
+      true
+    }
+
+    bindingDashboard.buttonCancelSearch.setOnClickListener {
+      bindingDashboard.isSearchMode = false
+      viewModelDashboard.query.value = ""
+    }
+
+    bindingDashboard.inputQuerySearch.setOnEditorActionListener { view, actionId, event ->
+      if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+        bindingDashboard.root.hideKeyboard()
+      }
+      true
+    }
   }
 
   private fun initAdapter() {
@@ -70,5 +97,18 @@ class DashboardActivity : AppCompatActivity() {
         Toast.makeText(this, "Load Failed. Try Again", Toast.LENGTH_LONG).show()
       }
     })
+
+    viewModelDashboard.query.observe(this, Observer { query ->
+      if (query.isNotBlank()) {
+
+      }
+    })
+  }
+
+  override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+    if (currentFocus != null) {
+      currentFocus!!.hideKeyboard()
+    }
+    return super.dispatchTouchEvent(ev)
   }
 }
