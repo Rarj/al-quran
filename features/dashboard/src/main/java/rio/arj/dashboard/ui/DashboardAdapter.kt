@@ -19,6 +19,10 @@ class DashboardAdapter(
       private val listener: ItemClickListener<Data>
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
+  fun clear() {
+    listSurah?.toMutableList()?.clear()
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val inflater = LayoutInflater.from(parent.context)
     val viewDataBinding = ItemSurahBinding.inflate(inflater, parent, false)

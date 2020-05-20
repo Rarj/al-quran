@@ -1,5 +1,6 @@
 package rio.arj.dashboard.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
@@ -18,7 +19,6 @@ import rio.arj.dashboard.di.DaggerDashboardComponent
 import rio.arj.dashboard.di.DashboardModule
 import rio.arj.data.repository.list.Data
 import rio.arj.detail.ui.DetailAyahActivity
-import rio.arj.ui.ItemDecoration
 import rio.arj.ui.hideKeyboard
 import javax.inject.Inject
 
@@ -48,6 +48,7 @@ class DashboardActivity : AppCompatActivity() {
     observer()
   }
 
+  @SuppressLint("CheckResult")
   private fun listener() {
     bindingDashboard.toolbarDashboard.setOnMenuItemClickListener {
       when (it.itemId) {
@@ -71,8 +72,8 @@ class DashboardActivity : AppCompatActivity() {
     }
   }
 
-  private fun initAdapter() {
-    dashboardAdapter = DashboardAdapter(this, viewModelDashboard.listSurah.value,
+  private fun initAdapter(list: List<Data>?) {
+    dashboardAdapter = DashboardAdapter(this, list,
           object : ItemClickListener<Data> {
             override fun onItemClicked(value: Data) {
               val intent = Intent(this@DashboardActivity, DetailAyahActivity::class.java)
@@ -80,10 +81,8 @@ class DashboardActivity : AppCompatActivity() {
               startActivity(intent)
             }
           })
-
     bindingDashboard.recyclerAlquran.apply {
       layoutManager = LinearLayoutManager(this@DashboardActivity)
-      addItemDecoration(ItemDecoration(16))
       this.adapter = dashboardAdapter
       dashboardAdapter.notifyDataSetChanged()
     }
@@ -92,15 +91,28 @@ class DashboardActivity : AppCompatActivity() {
   private fun observer() {
     viewModelDashboard.isSuccess.observe(this, Observer { isSuccess ->
       if (isSuccess) {
-        initAdapter()
+        initAdapter(viewModelDashboard.listSurah.value)
       } else {
         Toast.makeText(this, "Load Failed. Try Again", Toast.LENGTH_LONG).show()
       }
     })
 
     viewModelDashboard.query.observe(this, Observer { query ->
-      if (query.isNotBlank()) {
-
+      if (query.isBlank()) {
+        dashboardAdapter.clear()
+        initAdapter(viewModelDashboard.listSurah.value)
+        return@Observer
+      }
+      val listFilter = viewModelDashboard.listSurah.value?.filter { data ->
+        data.nama!!.contains(query)
+      }
+      if (listFilter != null && listFilter.isNotEmpty()) {
+        dashboardAdapter.clear()
+        initAdapter(listFilter)
+      } else if (listFilter.isNullOrEmpty()) {
+        dashboardAdapter.clear()
+        initAdapter(listFilter)
+        Toast.makeText(this, "Surah $query tidak ada", Toast.LENGTH_LONG).show()
       }
     })
   }
