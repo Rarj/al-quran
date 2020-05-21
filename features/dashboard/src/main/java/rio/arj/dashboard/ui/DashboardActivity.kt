@@ -64,7 +64,7 @@ class DashboardActivity : AppCompatActivity() {
       viewModelDashboard.query.value = ""
     }
 
-    bindingDashboard.inputQuerySearch.setOnEditorActionListener { view, actionId, event ->
+    bindingDashboard.inputQuerySearch.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_SEARCH) {
         bindingDashboard.root.hideKeyboard()
       }
@@ -98,14 +98,21 @@ class DashboardActivity : AppCompatActivity() {
     })
 
     viewModelDashboard.query.observe(this, Observer { query ->
+      val listSurah = viewModelDashboard.listSurah.value
       if (query.isBlank()) {
-        clearStateAdapter(viewModelDashboard.listSurah.value, false)
+        clearStateAdapter(listSurah, false)
         return@Observer
       }
-      val listFilter = viewModelDashboard.listSurah.value?.filter { data ->
-        data.nama!!.contains(query)
+      val listFilter: List<Data>?
+      if (listSurah != null) {
+        listFilter = listSurah.filter { data ->
+          data.nama!!.contains(query)
+        }
+      } else {
+        return@Observer
       }
-      if (listFilter != null && listFilter.isNotEmpty()) {
+
+      if (listFilter.isNotEmpty()) {
         clearStateAdapter(listFilter, false)
       } else if (listFilter.isNullOrEmpty()) {
         clearStateAdapter(listFilter, true)

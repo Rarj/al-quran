@@ -22,12 +22,13 @@ class DetailAyahAdapter(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(listAyah[position])
+    holder.bind(listAyah[position], listAyah.size)
   }
 
   class ViewHolder(private val viewDataBinding: ItemAyahBinding) : RecyclerView.ViewHolder(viewDataBinding.root) {
-    fun bind(model: DetailAyahModelItem) {
+    fun bind(model: DetailAyahModelItem, size: Int) {
       viewDataBinding.setVariable(BR.itemModel, model)
+      viewDataBinding.setVariable(BR.isVisibleDivider, adapterPosition != size - 1)
       viewDataBinding.executePendingBindings()
     }
   }

@@ -4,9 +4,13 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <data>
+    <import type="android.view.View" />
     <variable
       name="itemModel"
       type="rio.arj.data.repository.detail.DetailAyahModelItem" />
+    <variable
+      name="isVisibleDivider"
+      type="Boolean" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,6 +66,7 @@
       android:layout_marginTop="@dimen/margin_8"
       android:layout_marginEnd="@dimen/margin_8"
       android:background="@color/gray_ADABAB"
+      android:visibility="@{isVisibleDivider ? View.VISIBLE : View.GONE}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
