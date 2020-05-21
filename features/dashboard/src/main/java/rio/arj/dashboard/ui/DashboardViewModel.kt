@@ -21,6 +21,7 @@ class DashboardViewModel @Inject constructor(
   var isSuccess = MutableLiveData<Boolean>()
   var listSurah = MutableLiveData<List<Data>>()
   var query = MutableLiveData<String>()
+  var isEmpty = MutableLiveData<Boolean>()
 
   init {
     loadListSurah()

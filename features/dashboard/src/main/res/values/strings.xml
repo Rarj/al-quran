@@ -2,8 +2,9 @@
   <string name="dashboard_toolbar_caption">Beranda</string>
   <string name="dashboard_more_caption">Selengkapnya</string>
   <string name="dashboard_less_caption">Lebih Sedikit</string>
-  <string name="dashboard_search_caption">Cari…</string>
+  <string name="dashboard_search_caption">Cari surah…</string>
   <string name="dashboard_cancel_search_caption">Cancel</string>
+  <string name="dashboard_surah_not_found"><![CDATA[Surah <b>%s</b> tidak ditemukan]]></string>
 
   <string name="detail_bismillah_ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</string>
   <string name="detail_bismillah_id">bismillahirahmanirrahiim</string>

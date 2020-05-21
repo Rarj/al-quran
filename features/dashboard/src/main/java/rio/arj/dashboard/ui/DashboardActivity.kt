@@ -99,22 +99,24 @@ class DashboardActivity : AppCompatActivity() {
 
     viewModelDashboard.query.observe(this, Observer { query ->
       if (query.isBlank()) {
-        dashboardAdapter.clear()
-        initAdapter(viewModelDashboard.listSurah.value)
+        clearStateAdapter(viewModelDashboard.listSurah.value, false)
         return@Observer
       }
       val listFilter = viewModelDashboard.listSurah.value?.filter { data ->
         data.nama!!.contains(query)
       }
       if (listFilter != null && listFilter.isNotEmpty()) {
-        dashboardAdapter.clear()
-        initAdapter(listFilter)
+        clearStateAdapter(listFilter, false)
       } else if (listFilter.isNullOrEmpty()) {
-        dashboardAdapter.clear()
-        initAdapter(listFilter)
-        Toast.makeText(this, "Surah $query tidak ada", Toast.LENGTH_LONG).show()
+        clearStateAdapter(listFilter, true)
       }
     })
+  }
+
+  private fun clearStateAdapter(listData: List<Data>?, isEmpty: Boolean) {
+    dashboardAdapter.clear()
+    initAdapter(listData)
+    viewModelDashboard.isEmpty.value = isEmpty
   }
 
   override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

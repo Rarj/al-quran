@@ -3,6 +3,7 @@
 
   <data>
     <import type="android.view.View" />
+    <import type="android.text.Html" />
     <variable
       name="viewModelDashboard"
       type="rio.arj.dashboard.ui.DashboardViewModel" />
@@ -90,6 +91,34 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/toolbar_dashboard" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/image_not_found"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_16"
+      android:src="@drawable/ic_not_found"
+      android:visibility="@{viewModelDashboard.isEmpty() ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toTopOf="@id/text_not_found"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/toolbar_dashboard"
+      app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_not_found"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:maxLength="20"
+      android:text="@{Html.fromHtml(@string/dashboard_surah_not_found(viewModelDashboard.query))}"
+      android:textAlignment="center"
+      android:textAppearance="@style/TextAppearance.AppCompat.Large"
+      android:textColor="@color/gray_ADABAB"
+      android:visibility="@{viewModelDashboard.isEmpty() ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/image_not_found" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
