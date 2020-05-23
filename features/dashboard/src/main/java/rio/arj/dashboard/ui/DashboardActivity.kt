@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -131,5 +132,13 @@ class DashboardActivity : AppCompatActivity() {
       currentFocus!!.hideKeyboard()
     }
     return super.dispatchTouchEvent(ev)
+  }
+
+  override fun onBackPressed() {
+    if (bindingDashboard.inputQuerySearch.visibility == VISIBLE) {
+      bindingDashboard.isSearchMode = false
+    } else {
+      super.onBackPressed()
+    }
   }
 }
