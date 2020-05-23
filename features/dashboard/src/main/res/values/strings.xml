@@ -9,4 +9,6 @@
   <string name="detail_bismillah_ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</string>
   <string name="detail_bismillah_id">bismillahirahmanirrahiim</string>
   <string name="detail_bismillah_mean">Dengan menyebut nama Allah Yang Maha Pemurah lagi Maha Penyayang.</string>
+  <string name="detail_play_murattal">Mainkan murattal</string>
+  <string name="detail_stop_murattal">Hentikan murattal</string>
 </resources>
