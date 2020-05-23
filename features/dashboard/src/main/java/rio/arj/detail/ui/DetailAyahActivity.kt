@@ -1,5 +1,6 @@
 package rio.arj.detail.ui
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -37,6 +38,7 @@ class DetailAyahActivity : AppCompatActivity() {
   private lateinit var data: Data
 
   private var mediaPlayer: MediaPlayer? = null
+  private var isPlayedMurottal = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -66,32 +68,44 @@ class DetailAyahActivity : AppCompatActivity() {
   private fun listener() {
     binding.toolbarAyah.setNavigationOnClickListener { finish() }
 
-    var isPlayedMurottal = false
     binding.toolbarAyah.setOnMenuItemClickListener { menuItem ->
       when (menuItem.itemId) {
         R.id.item_play_murottal -> {
-          mediaPlayer?.setOnCompletionListener { _ ->
-            isPlayedMurottal = false
-            setTitleMenuItem(menuItem, getString(R.string.detail_play_murattal), R.drawable.ic_play)
-          }
-
-          isPlayedMurottal = !isPlayedMurottal
-          if (isPlayedMurottal) {
-            mediaPlayer?.start()
-            setTitleMenuItem(menuItem, getString(R.string.detail_stop_murattal), R.drawable.ic_stop)
-          } else {
-            if (mediaPlayer?.isPlaying!!) {
-              mediaPlayer?.pause()
-              mediaPlayer?.seekTo(0)
-            }
-            setTitleMenuItem(menuItem, getString(R.string.detail_play_murattal), R.drawable.ic_play)
-          }
+          playMurottal(menuItem)
         }
         R.id.item_share_surah -> {
+          var textShare = ""
+          viewModel.detailAyahModel.value?.forEachIndexed { index, model ->
+            textShare += "${model.ar.toString()}${index + 1} "
+          }
 
+          val intent = Intent()
+          intent.action = Intent.ACTION_SEND
+          intent.putExtra(Intent.EXTRA_TEXT, textShare)
+          intent.type = "text/plain"
+          startActivity(intent)
         }
       }
       true
+    }
+  }
+
+  private fun playMurottal(menuItem: MenuItem) {
+    mediaPlayer?.setOnCompletionListener { _ ->
+      isPlayedMurottal = false
+      setTitleMenuItem(menuItem, getString(R.string.detail_play_murattal), R.drawable.ic_play)
+    }
+
+    isPlayedMurottal = !isPlayedMurottal
+    if (isPlayedMurottal) {
+      mediaPlayer?.start()
+      setTitleMenuItem(menuItem, getString(R.string.detail_stop_murattal), R.drawable.ic_stop)
+    } else {
+      if (mediaPlayer?.isPlaying!!) {
+        mediaPlayer?.pause()
+        mediaPlayer?.seekTo(0)
+      }
+      setTitleMenuItem(menuItem, getString(R.string.detail_play_murattal), R.drawable.ic_play)
     }
   }
 

@@ -15,13 +15,22 @@ import java.util.concurrent.TimeUnit
 
 class DashboardAdapter(
       private val context: Context,
-      private val listSurah: List<Data>?,
+      private var listSurah: List<Data>?,
       private val listener: ItemClickListener<Data>
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
-  fun clear() {
-    listSurah?.toMutableList()?.clear()
+  var actuallyListSurah: List<Data>? = listSurah
+  fun filterByQuery(query: String) {
+    listSurah = if (query.isBlank()) {
+      actuallyListSurah
+    } else {
+      val filterSurah = actuallyListSurah?.filter { data -> data.nama!!.contains(query) }
+      filterSurah
+    }
+    notifyDataSetChanged()
   }
+
+  fun isSurahNotFound() = listSurah?.isEmpty()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val inflater = LayoutInflater.from(parent.context)

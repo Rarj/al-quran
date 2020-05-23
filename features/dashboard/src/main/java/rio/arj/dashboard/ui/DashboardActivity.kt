@@ -67,7 +67,7 @@ class DashboardActivity : AppCompatActivity() {
 
     bindingDashboard.inputQuerySearch.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-        bindingDashboard.root.hideKeyboard()
+        bindingDashboard.inputQuerySearch.hideKeyboard()
       }
       true
     }
@@ -99,32 +99,9 @@ class DashboardActivity : AppCompatActivity() {
     })
 
     viewModelDashboard.query.observe(this, Observer { query ->
-      val listSurah = viewModelDashboard.listSurah.value
-      if (query.isBlank()) {
-        clearStateAdapter(listSurah, false)
-        return@Observer
-      }
-      val listFilter: List<Data>?
-      if (listSurah != null) {
-        listFilter = listSurah.filter { data ->
-          data.nama!!.contains(query)
-        }
-      } else {
-        return@Observer
-      }
-
-      if (listFilter.isNotEmpty()) {
-        clearStateAdapter(listFilter, false)
-      } else if (listFilter.isNullOrEmpty()) {
-        clearStateAdapter(listFilter, true)
-      }
+      dashboardAdapter.filterByQuery(query)
+      viewModelDashboard.isEmpty.value = dashboardAdapter.isSurahNotFound()
     })
-  }
-
-  private fun clearStateAdapter(listData: List<Data>?, isEmpty: Boolean) {
-    dashboardAdapter.clear()
-    initAdapter(listData)
-    viewModelDashboard.isEmpty.value = isEmpty
   }
 
   override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
